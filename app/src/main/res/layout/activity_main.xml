@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/bt_0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="普通消息提示对话框"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/bt_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="普通对话框"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/bt_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="列表对话框"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/bt_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="单选列表对话框"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/bt_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="多选列表对话框"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/bt_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="编辑对话框"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/bt_6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="圆形进度条"
+        tools:ignore="HardcodedText" />
+
+</LinearLayout>
