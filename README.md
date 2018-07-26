@@ -1,4 +1,4 @@
-<img src="https://github.com/mailhu/islands/blob/master/app/src/main/res/drawable-xxhdpi/logo.png"  height="80" width="80">
+<img src="https://github.com/mailhu/islands/blob/master/app/src/main/res/drawable-xxhdpi/logo.png"  height="100" width="100">
 
 # Islands
 [![](https://jitpack.io/v/mailhu/islands.svg)](https://jitpack.io/#mailhu/islands)
@@ -7,8 +7,7 @@ Islands是Android一个已对原生对话框进行封装的工具库。其中包
 </br></br></br>
 
 # Screenshot
-<img src="https://github.com/mailhu/islands/blob/master/image/image_1.png"  height="384" width="216"><img src="https://github.com/mailhu/islands/blob/master/image/image_2.png"  height="384" width="216">
-<img src="https://github.com/mailhu/islands/blob/master/image/image_3.png"  height="384" width="216"><img src="https://github.com/mailhu/islands/blob/master/image/image_7.png"  height="384" width="216">
+<img src="https://github.com/mailhu/islands/blob/master/image/image_1.png"  height="384" width="216"><img src="https://github.com/mailhu/islands/blob/master/image/image_2.png"  height="384" width="216"><img src="https://github.com/mailhu/islands/blob/master/image/image_3.png"  height="384" width="216"><img src="https://github.com/mailhu/islands/blob/master/image/image_7.png"  height="384" width="216">
 
 更多示例截图，请[点击这里](https://github.com/mailhu/islands/tree/master/image)
 </br></br></br>
