@@ -1,20 +1,28 @@
 package com.smailnet.demo;
 
 import android.app.ProgressDialog;
+import android.os.Build;
 import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.smailnet.islands.BaseDialog;
 import com.smailnet.islands.Islands;
 import com.smailnet.islands.OnClickListener;
+import com.smailnet.islands.OnDateSelectListener;
 import com.smailnet.islands.OnEditDialogListener;
 import com.smailnet.islands.OnMultiChoiceClickListener;
 import com.smailnet.islands.OnRunningListener;
+import com.smailnet.islands.OnTimeSelectListener;
+import com.smailnet.islands.SelectDate;
+import com.smailnet.islands.SelectTime;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -33,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button button_4 = findViewById(R.id.bt_4);
         Button button_5 = findViewById(R.id.bt_5);
         Button button_6 = findViewById(R.id.bt_6);
+        Button button_7 = findViewById(R.id.bt_7);
+        Button button_8 = findViewById(R.id.bt_8);
 
         button_0.setOnClickListener(this);
         button_1.setOnClickListener(this);
@@ -41,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button_4.setOnClickListener(this);
         button_5.setOnClickListener(this);
         button_6.setOnClickListener(this);
+        button_7.setOnClickListener(this);
+        button_8.setOnClickListener(this);
     }
 
     @Override
@@ -133,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bt_5:
                 //编辑对话框
                 new Islands.EditDialog(this)
+                        .setEditText("小学生")
                         .setEditTextHint("1-16个字符")         //文本提示，参数可以为null
                         .setText("修改昵称", null)
                         .setCancelable(false)
@@ -167,6 +180,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 }, 5000);
                             }
                         });
+                break;
+            case R.id.bt_7:
+                //日历对话框
+                new Islands.DateDialog(this)
+                        .select(new OnDateSelectListener() {                //选择日期
+                            @Override
+                            public void OnDateSelect(SelectDate date) {     //得到结果
+                                Log.e("oversee", date.getYear() + "年" +
+                                        date.getMonth() + "月" + date.getDay() + "日");
+                            }
+                        }).show();
+                break;
+            case R.id.bt_8:
+                new Islands.TimeDialog(this)
+                        .select(new OnTimeSelectListener() {                //选择时间
+                            @Override
+                            public void onTimeSelect(SelectTime time) {     //得到结果
+                                Log.e("oversee", time.getHour() + "时" + time.getMinute() + "分");
+                            }
+                        }).show();
                 break;
         }
     }

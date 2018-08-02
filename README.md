@@ -1,15 +1,23 @@
-<img src="https://github.com/mailhu/islands/blob/master/app/src/main/res/drawable-xxhdpi/logo.png"  height="100" width="100">
+<img src="https://github.com/mailhu/islands/blob/master/app/src/main/res/drawable-xxhdpi/logo.png"  height="80" width="80">
 
 # Islands
 [![](https://jitpack.io/v/mailhu/islands.svg)](https://jitpack.io/#mailhu/islands)
 
-Islands是Android一个已对原生对话框进行封装的工具库。其中包括普通对话框，列表对话框，单选对话框，多选对话框，编辑对话框，进度条对话框。只需只需简单的调用，即快速创建对话框。
+Islands是Android一个已对原生对话框进行封装的工具库。其中包括普通对话框、列表对话框、单选对话框、多选对话框、编辑对话框、进度条对话框、日历对话框，时钟对话框。只需只需简单的调用，即快速创建对话框。
 </br></br></br>
 
 # Screenshot
 <img src="https://github.com/mailhu/islands/blob/master/image/image_1.png"  height="384" width="216"><img src="https://github.com/mailhu/islands/blob/master/image/image_2.png"  height="384" width="216"><img src="https://github.com/mailhu/islands/blob/master/image/image_3.png"  height="384" width="216"><img src="https://github.com/mailhu/islands/blob/master/image/image_7.png"  height="384" width="216">
+<img src="https://github.com/mailhu/islands/blob/master/image/image_8.png"  height="384" width="216"><img src="https://github.com/mailhu/islands/blob/master/image/image_9.png"  height="384" width="216"><img src="https://github.com/mailhu/islands/blob/master/image/image_4.png"  height="384" width="216"><img src="https://github.com/mailhu/islands/blob/master/image/image_5.png"  height="384" width="216">
+
 
 更多示例截图，请[点击这里](https://github.com/mailhu/islands/tree/master/image)
+</br></br></br>
+
+# Update log
+1. 增加日历对话框控件
+2. 增加时钟对话框控件
+3. 编辑对话框增加.setEditText()方法
 </br></br></br>
 
 # Install
@@ -26,14 +34,14 @@ allprojects {
 步骤二，在项目的app模块下的build.gradle里加：
 ```
 dependencies {
-    implementation 'com.github.mailhu:islands:1.0'
+    implementation 'com.github.mailhu:islands:1.1'
 }
 ```
 </br></br></br>
 
 # How do I use Islands?
 使用教程的讲解先易后难
-##### 一、创建一个圆形进度条对话框
+##### 一、创建圆形进度条对话框
 ```java
 //圆形进度条对话框
 new Islands.CircularProgress(this)
@@ -131,6 +139,7 @@ new Islands.SingleChoiceDialog(this)
 ```java
 //编辑对话框
 new Islands.EditDialog(this)
+    .setEditText("小学生")
     .setEditTextHint("1-16个字符")          //文本提示，参数可以为null
     .setText("修改昵称", null)
     .setCancelable(false)
@@ -157,13 +166,36 @@ new Islands.MultiChoiceDialog(this)
     .setMultiChoiceItems(items_3, checkeditems, new OnMultiChoiceClickListener() {
         @Override
         public void onClick(int which, boolean isChecked) {
-                                
+
         }
     })
     .setText("选择多个科目", null)
     .setButton("确定", "取消", null)
     .click()
     .show();
+```
+
+##### 八、创建日期对话框
+```java
+//日历对话框
+new Islands.DateDialog(this)
+    .select(new OnDateSelectListener() {                //选择日期
+        @Override
+        public void OnDateSelect(SelectDate date) {     //得到结果
+            Log.e("oversee", date.getYear() + "年" + date.getMonth() + "月" + date.getDay() + "日");
+        }
+    }).show();
+```
+
+##### 九、创建时钟对话框
+```java
+new Islands.TimeDialog(this)
+    .select(new OnTimeSelectListener() {                //选择时间
+        @Override
+        public void onTimeSelect(SelectTime time) {     //得到结果
+            Log.e("oversee", time.getHour() + "时" + time.getMinute() + "分");
+        }
+    }).show();
 ```
 </br></br></br>
 

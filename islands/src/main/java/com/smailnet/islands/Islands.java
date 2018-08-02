@@ -16,9 +16,16 @@
 
 package com.smailnet.islands;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
+
+import java.util.Date;
 
 /**
  * Islands是Android一个已对原生对话框进行封装的工具库。
@@ -28,7 +35,7 @@ import android.content.DialogInterface;
  *
  * @author 张观湖
  * @author E-mail: zguanhu@foxmail.com
- * @version 1.0
+ * @version 1.1
  */
 public class Islands{
 
@@ -130,6 +137,18 @@ public class Islands{
         public EditDialog(Context context) {
             super(context);
             this.context = context;
+            dialog.setView(view);
+        }
+
+        /**
+         * 设置编辑框的文本
+         * @param text
+         * @return
+         */
+        public EditDialog setEditText(String text){
+            editText.setText(text);
+            editText.setSelection(text.length());
+            return this;
         }
 
         /**
@@ -138,7 +157,6 @@ public class Islands{
          * @return
          */
         public EditDialog setEditTextHint(String textHint){
-            dialog.setView(view);
             editText.setHint(textHint);
             return this;
         }
@@ -195,4 +213,79 @@ public class Islands{
             return this;
         }
     }
+
+    /**
+     * 日历对话框
+     */
+    public static class DateDialog{
+
+        private Context context;
+        private DatePickerDialog datePickerDialog;
+
+        public DateDialog(Context context){
+            this.context = context;
+        }
+
+        /**
+         * 选择日期
+         * @param onDateSelectListener
+         * @return
+         */
+        public DateDialog select(final OnDateSelectListener onDateSelectListener){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                datePickerDialog = new DatePickerDialog(context);
+                datePickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        onDateSelectListener.OnDateSelect(new SelectDate(view));
+                    }
+                });
+            }else {
+                Date date = new Date();
+                datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        onDateSelectListener.OnDateSelect(new SelectDate(view));
+                    }
+                }, DateUtil.getYear(date), DateUtil.getMonth(date) - 1, DateUtil.getDay(date));
+            }
+            return this;
+        }
+
+
+        public DateDialog show(){
+            datePickerDialog.show();
+            return this;
+        }
+    }
+
+    /**
+     * 时钟对话框
+     */
+    public static class TimeDialog{
+
+        private Context context;
+        private TimePickerDialog timePickerDialog;
+
+        public TimeDialog(Context context){
+            this.context = context;
+        }
+
+        public TimeDialog select(final OnTimeSelectListener onTimeSelectListener){
+            Date date = new Date();
+            timePickerDialog = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+                @Override
+                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                    onTimeSelectListener.onTimeSelect(new SelectTime(hourOfDay, minute));
+                }
+            }, DateUtil.getHour(date), DateUtil.getMinute(date), true);
+            return this;
+        }
+
+        public TimeDialog show(){
+            timePickerDialog.show();
+            return this;
+        }
+    }
+
 }

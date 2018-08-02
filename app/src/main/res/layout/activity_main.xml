@@ -54,4 +54,18 @@
         android:text="圆形进度条"
         tools:ignore="HardcodedText" />
 
+    <Button
+        android:id="@+id/bt_7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="日历对话框"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/bt_8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="时钟对话框"
+        tools:ignore="HardcodedText" />
+
 </LinearLayout>
