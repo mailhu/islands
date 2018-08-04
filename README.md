@@ -3,7 +3,7 @@
 # Islands
 [![](https://jitpack.io/v/mailhu/islands.svg)](https://jitpack.io/#mailhu/islands)
 
-Islands是Android一个已对原生对话框进行封装的工具库。其中包括普通对话框、列表对话框、单选对话框、多选对话框、编辑对话框、进度条对话框、日历对话框，时钟对话框。只需只需简单的调用，即快速创建对话框。
+Islands是Android一个已对原生对话框进行封装的工具库。其中包括普通对话框、列表对话框、单选对话框、多选对话框、编辑对话框、进度条对话框、日历对话框，时钟对话框。只需简单的调用，即快速创建对话框。
 </br></br></br>
 
 # Screenshot
