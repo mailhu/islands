@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2018 Lake Zhang
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package com.smailnet.islands;
+package com.smailnet.islands.Dialog;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
-import android.view.View;
-import android.widget.EditText;
+
+import com.smailnet.islands.Interface.OnClickListener;
 
 /**
- * 父类对话框
+ * 普通对话框
  */
-public class BaseDialog {
+public class OrdinaryDialog {
 
     private int iconId;                     //图标
     private String title;                   //标题
@@ -34,15 +34,10 @@ public class BaseDialog {
     private String negativeButton;          //negative按钮
     private String neutralButton;           //neutral按钮
     private boolean cancelable = true;      //是否可取消
-    protected Context context;
-    protected AlertDialog.Builder dialog;
-    protected View view;
-    protected EditText editText;
+    private AlertDialog.Builder dialog;
 
-    public BaseDialog(Context context) {
-        this.dialog = new AlertDialog.Builder(context);
-        view = View.inflate(context, R.layout.dialog_layout, null);
-        editText = view.findViewById(R.id.dialog_EditText);
+    public OrdinaryDialog(Context context){
+        dialog = new AlertDialog.Builder(context);
     }
 
     /**
@@ -51,7 +46,7 @@ public class BaseDialog {
      * @param iconId
      * @return
      */
-    public BaseDialog setIcon(int iconId){
+    public OrdinaryDialog setIcon(int iconId){
         this.iconId = iconId;
         return this;
     }
@@ -63,24 +58,9 @@ public class BaseDialog {
      * @param message
      * @return
      */
-    public BaseDialog setText(String title, String message) {
+    public OrdinaryDialog setText(String title, String message) {
         this.title = title;
         this.message = message;
-        return this;
-    }
-
-    /**
-     * 设置按钮
-     *
-     * @param positiveButton
-     * @param negativeButton
-     * @param neutralButton
-     * @return
-     */
-    public BaseDialog setButton(String positiveButton, String negativeButton, String neutralButton){
-        this.positiveButton = positiveButton;
-        this.negativeButton = negativeButton;
-        this.neutralButton = neutralButton;
         return this;
     }
 
@@ -90,8 +70,24 @@ public class BaseDialog {
      * @param cancelable
      * @return
      */
-    public BaseDialog setCancelable(boolean cancelable){
+    public OrdinaryDialog setCancelable(boolean cancelable){
         this.cancelable = cancelable;
+        return this;
+    }
+
+
+    /**
+     * 设置按钮
+     *
+     * @param positiveButton
+     * @param negativeButton
+     * @param neutralButton
+     * @return
+     */
+    public OrdinaryDialog setButton(String positiveButton, String negativeButton, String neutralButton){
+        this.positiveButton = positiveButton;
+        this.negativeButton = negativeButton;
+        this.neutralButton = neutralButton;
         return this;
     }
 
@@ -100,7 +96,7 @@ public class BaseDialog {
      * @param onClickListener
      * @return
      */
-    public BaseDialog click(final OnClickListener onClickListener){
+    public OrdinaryDialog click(final OnClickListener onClickListener){
         dialog.setPositiveButton(positiveButton, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -129,44 +125,11 @@ public class BaseDialog {
     }
 
     /**
-     * 设置点击回调，回调onEditDialogListener
-     *
-     * @param onEditDialogListener
-     * @return
-     */
-    public BaseDialog click(final OnEditDialogListener onEditDialogListener){
-        dialog.setPositiveButton(positiveButton, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                onEditDialogListener.getText(editText.getText().toString(), 0);
-                dialog.dismiss();
-            }
-        });
-
-        dialog.setNegativeButton(negativeButton, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                onEditDialogListener.getText(editText.getText().toString(), 1);
-                dialog.dismiss();
-            }
-        });
-
-        dialog.setNeutralButton(neutralButton, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                onEditDialogListener.getText(editText.getText().toString(), 2);
-                dialog.dismiss();
-            }
-        });
-        return this;
-    }
-
-    /**
      * 设置点击，无回调
      *
      * @return
      */
-    public BaseDialog click(){
+    public OrdinaryDialog click(){
         dialog.setPositiveButton(positiveButton, null);
         dialog.setNegativeButton(negativeButton, null);
         dialog.setNeutralButton(neutralButton, null);
@@ -178,7 +141,7 @@ public class BaseDialog {
      *
      * @return
      */
-    public BaseDialog show(){
+    public OrdinaryDialog show(){
         dialog.setIcon(iconId);
         dialog.setTitle(title);
         dialog.setMessage(message);

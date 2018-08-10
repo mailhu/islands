@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2018 Lake Zhang
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-package com.smailnet.islands;
+package com.smailnet.islands.Interface;
+
+import android.app.ProgressDialog;
 
 /**
- * 多选列表点击回调
+ * 进度条对话框运行回调
  */
-public interface OnMultiChoiceClickListener {
-    void onClick(int which, boolean isChecked);
+public interface OnRunningListener {
+    void onRunning(ProgressDialog dialog);
 }

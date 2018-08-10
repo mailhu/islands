@@ -1,5 +1,4 @@
-package com.smailnet.islands;
-/**
+/*
  * Copyright 2018 Lake Zhang
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,29 +13,11 @@ package com.smailnet.islands;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import android.widget.DatePicker;
+package com.smailnet.islands.Interface;
 
 /**
- * 获取选择的日期结果
+ * 单选对话框监听
  */
-public class SelectDate {
-
-    private DatePicker datePicker;
-
-    public SelectDate(DatePicker datePicker){
-        this.datePicker = datePicker;
-    }
-
-    public int getYear(){
-        return datePicker.getYear();
-    }
-
-    public int getMonth(){
-        return datePicker.getMonth() + 1;
-    }
-
-    public int getDay(){
-        return datePicker.getDayOfMonth();
-    }
+public interface OnSingeChoiceListener {
+    void onClick(int which);
 }

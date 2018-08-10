@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2018 Lake Zhang
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.smailnet.islands;
+package com.smailnet.islands.Interface;
 
 /**
  * 编辑框文本回调
  *
  */
-public interface OnEditDialogListener {
+public interface OnEditListener {
     void getText(String text, int which);
 }

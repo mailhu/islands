@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2018 Lake Zhang
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +14,13 @@
  * limitations under the License.
  */
 
-package com.smailnet.islands;
+package com.smailnet.islands.Interface;
 
+import com.smailnet.islands.Utils.SelectDate;
+
+/**
+ * 日期选择监听
+ */
 public interface OnDateSelectListener {
     void OnDateSelect(SelectDate date);
 }

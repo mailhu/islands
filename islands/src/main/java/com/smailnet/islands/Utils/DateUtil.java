@@ -1,11 +1,11 @@
-package com.smailnet.islands;
+package com.smailnet.islands.Utils;
 
 import android.annotation.SuppressLint;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-class DateUtil {
+public class DateUtil {
 
     @SuppressLint("SimpleDateFormat")
     public static int getYear(Date date){

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2018 Lake Zhang
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,26 +14,11 @@
  * limitations under the License.
  */
 
-package com.smailnet.islands;
+package com.smailnet.islands.Interface;
 
 /**
- * 获取选择时间的结果
+ * 点击事件回调
  */
-public class SelectTime {
-
-    private int hourOfDay;
-    private int minute;
-
-    public SelectTime(int hourOfDay, int minute){
-        this.hourOfDay = hourOfDay;
-        this.minute = minute;
-    }
-
-    public int getHour(){
-        return hourOfDay;
-    }
-
-    public int getMinute(){
-        return minute;
-    }
+public interface OnClickListener {
+    void onClick(int which);
 }

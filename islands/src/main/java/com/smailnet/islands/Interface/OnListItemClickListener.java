@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2018 Lake Zhang
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +14,11 @@
  * limitations under the License.
  */
 
-package com.smailnet.islands;
+package com.smailnet.islands.Interface;
 
-public interface OnTimeSelectListener {
-    void onTimeSelect(SelectTime time);
+/**
+ * 列表对话框监听
+ */
+public interface OnListItemClickListener {
+    void onClick(int which);
 }
