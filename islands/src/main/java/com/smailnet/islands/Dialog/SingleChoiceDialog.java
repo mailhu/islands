@@ -26,19 +26,10 @@ import com.smailnet.islands.Interface.OnSingeChoiceListener;
 /**
  * 单选对话框
  */
-public class SingleChoiceDialog {
-
-    private int iconId;                     //图标
-    private String title;                   //标题
-    private String message;                 //文本信息
-    private boolean cancelable = true;      //是否可取消
-    private String[] items;
-    private int checkedItem;
-    private OnSingeChoiceListener onSingeChoiceListener;
-    private AlertDialog.Builder dialog;
+public class SingleChoiceDialog extends BaseDialog{
 
     public SingleChoiceDialog(Context context){
-        dialog = new AlertDialog.Builder(context);
+        super(context);
     }
 
     /**
@@ -48,7 +39,7 @@ public class SingleChoiceDialog {
      * @return
      */
     public SingleChoiceDialog setIcon(int iconId){
-        this.iconId = iconId;
+        alertDialog.setIcon(iconId);
         return this;
     }
 
@@ -56,12 +47,10 @@ public class SingleChoiceDialog {
      * 设置标题和文本信息
      *
      * @param title
-     * @param message
      * @return
      */
-    public SingleChoiceDialog setText(String title, String message) {
-        this.title = title;
-        this.message = message;
+    public SingleChoiceDialog setText(String title) {
+        alertDialog.setTitle(title);
         return this;
     }
 
@@ -72,7 +61,7 @@ public class SingleChoiceDialog {
      * @return
      */
     public SingleChoiceDialog setCancelable(boolean cancelable){
-        this.cancelable = cancelable;
+        alertDialog.setCancelable(cancelable);
         return this;
     }
 
@@ -82,50 +71,14 @@ public class SingleChoiceDialog {
      * @param items
      * @return
      */
-    public SingleChoiceDialog setItems(String[] items){
-        this.items = items;
-        return this;
-    }
-
-    /**
-     * 设置checkedItem
-     *
-     * @param checkedItem
-     * @return
-     */
-    public SingleChoiceDialog setCheckedItem(int checkedItem){
-        this.checkedItem = checkedItem;
-        return this;
-    }
-
-    /**
-     * 设置点击监听
-     * @param onSingeChoiceListener
-     * @return
-     */
-    public SingleChoiceDialog click(OnSingeChoiceListener onSingeChoiceListener){
-        this.onSingeChoiceListener = onSingeChoiceListener;
-        return this;
-    }
-
-    /**
-     * 显示对话框
-     *
-     * @return
-     */
-    public SingleChoiceDialog show(){
-        dialog.setIcon(iconId);
-        dialog.setTitle(title);
-        dialog.setMessage(message);
-        dialog.setCancelable(cancelable);
-        dialog.setSingleChoiceItems(items, checkedItem, new DialogInterface.OnClickListener() {
+    public SingleChoiceDialog setSingleChoiceItems(String[] items, int checkedItem, final OnSingeChoiceListener onSingeChoiceListener){
+        alertDialog.setSingleChoiceItems(items, checkedItem, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 onSingeChoiceListener.onClick(which);
                 dialog.dismiss();
             }
         });
-        dialog.show();
         return this;
     }
 

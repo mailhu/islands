@@ -49,9 +49,8 @@ public class TimeDialog {
         return this;
     }
 
-    public TimeDialog show(){
+    public void show(){
         timePickerDialog.show();
-        return this;
     }
 
 }

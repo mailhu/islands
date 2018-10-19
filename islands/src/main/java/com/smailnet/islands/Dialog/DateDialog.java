@@ -66,8 +66,7 @@ public class DateDialog {
     }
 
 
-    public DateDialog show(){
+    public void show(){
         datePickerDialog.show();
-        return this;
     }
 }

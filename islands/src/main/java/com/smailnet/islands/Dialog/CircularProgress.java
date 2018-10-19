@@ -16,7 +16,6 @@
 
 package com.smailnet.islands.Dialog;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 
 import com.smailnet.islands.Interface.OnRunningListener;
@@ -24,18 +23,14 @@ import com.smailnet.islands.Interface.OnRunningListener;
 /**
  * 圆形进度条对话框
  */
-public class CircularProgress {
-
-    private ProgressDialog dialog;          //进度条对话框
-    private String message;                 //message
-    private boolean cancelable = true;      //是否可取消
+public class CircularProgress extends BaseDialog{
 
     public CircularProgress(Context context){
-        this.dialog = new ProgressDialog(context);
+        super(context, 1);
     }
 
     public CircularProgress setMessage(String message){
-        this.message = message;
+        progressDialog.setMessage(message);
         return this;
     }
 
@@ -45,19 +40,7 @@ public class CircularProgress {
      * @return
      */
     public CircularProgress setCancelable(boolean cancelable){
-        this.cancelable = cancelable;
-        return this;
-    }
-
-    /**
-     * 显示进度条对话框
-     *
-     * @return
-     */
-    public CircularProgress show(){
-        dialog.setMessage(message);
-        dialog.setCancelable(cancelable);
-        dialog.show();
+        progressDialog.setCancelable(cancelable);
         return this;
     }
 
@@ -68,7 +51,7 @@ public class CircularProgress {
      * @return
      */
     public CircularProgress run(OnRunningListener onRunningListener){
-        onRunningListener.onRunning(dialog);
+        onRunningListener.onRunning(progressDialog);
         return this;
     }
 }

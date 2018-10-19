@@ -25,22 +25,13 @@ import com.smailnet.islands.Interface.OnMultiChoiceClickListener;
 /**
  * 多选对话框
  */
-public class MultiChoiceDialog {
+public class MultiChoiceDialog extends BaseDialog{
 
-    private int iconId;                     //图标
-    private String title;                   //标题
-    private String message;                 //文本信息
-    private boolean cancelable = true;      //是否可取消
-    private String positiveButton;          //positive按钮
-    private String negativeButton;          //negative按钮
-    private String neutralButton;           //neutral按钮
     private String[] items;
     private boolean[] checkedItems;
-    private OnMultiChoiceClickListener onMultiChoiceClickListener;
-    private AlertDialog.Builder dialog;
 
     public MultiChoiceDialog(Context context){
-        dialog = new AlertDialog.Builder(context);
+        super(context);
     }
 
     /**
@@ -50,7 +41,7 @@ public class MultiChoiceDialog {
      * @return
      */
     public MultiChoiceDialog setIcon(int iconId){
-        this.iconId = iconId;
+        alertDialog.setIcon(iconId);
         return this;
     }
 
@@ -58,12 +49,10 @@ public class MultiChoiceDialog {
      * 设置标题和文本信息
      *
      * @param title
-     * @param message
      * @return
      */
-    public MultiChoiceDialog setText(String title, String message) {
-        this.title = title;
-        this.message = message;
+    public MultiChoiceDialog setText(String title) {
+        alertDialog.setTitle(title);
         return this;
     }
 
@@ -74,7 +63,7 @@ public class MultiChoiceDialog {
      * @return
      */
     public MultiChoiceDialog setCancelable(boolean cancelable){
-        this.cancelable = cancelable;
+        alertDialog.setCancelable(cancelable);
         return this;
     }
 
@@ -103,68 +92,39 @@ public class MultiChoiceDialog {
     /**
      * 设置按钮
      *
-     * @param positiveButton
-     * @param negativeButton
-     * @param neutralButton
+     * @param positive
+     * @param negative
+     * @param neutral
      * @return
      */
-    public MultiChoiceDialog setButton(String positiveButton, String negativeButton, String neutralButton){
-        this.positiveButton = positiveButton;
-        this.negativeButton = negativeButton;
-        this.neutralButton = neutralButton;
-        return this;
-    }
-
-    /**
-     * 设置点击，无回调
-     *
-     * @return
-     */
-    public MultiChoiceDialog click(OnMultiChoiceClickListener onMultiChoiceClickListener){
-        this.onMultiChoiceClickListener = onMultiChoiceClickListener;
-        return this;
-    }
-
-    /**
-     * 显示对话框
-     *
-     * @return
-     */
-    public MultiChoiceDialog show(){
-        dialog.setIcon(iconId);
-        dialog.setTitle(title);
-        dialog.setMessage(message);
-        dialog.setCancelable(cancelable);
-        dialog.setMultiChoiceItems(items, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+    public MultiChoiceDialog setButton(String positive, String negative, String neutral, final OnMultiChoiceClickListener onMultiChoiceClickListener){
+        alertDialog.setMultiChoiceItems(items, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                 checkedItems[which] = isChecked;
             }
         });
-        dialog.setPositiveButton(positiveButton, new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton(positive, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 onMultiChoiceClickListener.onClick(items, checkedItems);
                 dialog.dismiss();
             }
         });
-
-        dialog.setNegativeButton(negativeButton, new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton(negative, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 onMultiChoiceClickListener.onClick(items, checkedItems);
                 dialog.dismiss();
             }
         });
-
-        dialog.setNeutralButton(neutralButton, new DialogInterface.OnClickListener() {
+        alertDialog.setNeutralButton(neutral, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 onMultiChoiceClickListener.onClick(items, checkedItems);
                 dialog.dismiss();
             }
         });
-        dialog.show();
         return this;
     }
 }

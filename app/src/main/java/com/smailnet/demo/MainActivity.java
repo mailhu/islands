@@ -57,28 +57,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.bt_0:
                 //普通消息提示对话框，只用于提示信息给用户，并不会处理其他事件
-                Islands.
-                        ordinaryDialog(this)
-                        //第一个参数对话框的Title，第二个参数是对话框的Message，若不设置标题传入参数null
+                Islands.ordinaryDialog(this)
                         .setText(null, "当前网络连接异常，请稍后再尝试")
-                        //分别设置对话框positiveButton，negativeButton，neutralButton的名称，不需要显
-                        //示的按钮，传入参数null
                         .setButton("关闭", null, null)
-                        //只显示提示信息，不处理事件，调用.click()，注：先.setButton()后.click()
-                        .click()
-                        .show();        //显示对话框
+                        .show();
                 break;
             case R.id.bt_1:
                 //普通消息对话框
-                Islands
-                        .ordinaryDialog(this)
+                Islands.ordinaryDialog(this)
                         .setText("发现新版本", "修复已知漏洞")
                         .setCancelable(false)
-                        .setButton("立即更新", "暂不更新", "不再提示")
-                        .click(new OnClickListener() {
+                        .setButton("立即更新", "暂不更新", "不再提示", new OnClickListener() {
                             @Override
                             public void onClick(int which) {
-                                //点击positiveButton、negativeButton、neutralButton，which的值分别为0、1，2。
                                 if (0 == which){
                                     Toast.makeText(MainActivity.this, "立即更新", Toast.LENGTH_SHORT).show();
                                 }else if (1 == which){
@@ -93,12 +84,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //设置一组字符串数组
                 final String listItems[] = {"语文", "数学", "英语", "物理", "化学", "生物"};
                 //列表对话框
-                Islands
-                        .listDialog(this)
+                Islands.listDialog(this)
                         .setCancelable(false)
-                        .setText("选择一个科目", null)        //设置Title，Message必须为null，否则列表对话框不显示
-                        .setItems(listItems)                 //设置列表对话框的items
-                        .click(new OnListItemClickListener() {
+                        .setText("选择一个科目")                                 //设置Title
+                        .setItems(listItems, new OnListItemClickListener() {    //设置列表对话框的items
                             @Override
                             public void onClick(int which) {
                                 Toast.makeText(MainActivity.this, listItems[which], Toast.LENGTH_SHORT).show();
@@ -109,13 +98,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //设置一组字符串数组和默认选中的item
                 final String singleItems[] = {"男", "女", "保密"};
                 //单选对话框
-                Islands
-                        .singleChoiceDialog(this)
-                        .setText("性别", null)
+                Islands.singleChoiceDialog(this)
+                        .setText("性别")
                         .setCancelable(false)
-                        .setItems(singleItems)
-                        .setCheckedItem(2)
-                        .click(new OnSingeChoiceListener() {
+                        .setSingleChoiceItems(singleItems, 2, new OnSingeChoiceListener() {
                             @Override
                             public void onClick(int which) {
                                 Toast.makeText(MainActivity.this, singleItems[which], Toast.LENGTH_SHORT).show();
@@ -124,13 +110,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt_4:
                 //多选对话框
-                Islands
-                        .multiChoiceDialog(this)
-                        .setItems(new String[]{"语文", "数学", "英语", "物理", "化学", "生物"})
-                        .setCheckedItems(new boolean[]{true, false, true, false, true, false})
-                        .setText("选择多个科目", null)
-                        .setButton("确定", "取消", null)
-                        .click(new OnMultiChoiceClickListener() {
+                final String multiItems[] = new String[]{"语文", "数学", "英语", "物理", "化学", "生物"};
+                final boolean checkedItems[] = new boolean[]{true, false, true, false, true, false};
+                Islands.multiChoiceDialog(this)
+                        .setItems(multiItems)
+                        .setCheckedItems(checkedItems)
+                        .setText("选择多个科目")
+                        .setButton("确定", "取消", null, new OnMultiChoiceClickListener() {
                             @Override
                             public void onClick(String[] items, boolean[] checkedItems) {
                                 for (int i = 0; i < checkedItems.length; i++){
@@ -143,14 +129,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt_5:
                 //编辑对话框
-                Islands
-                        .editDialog(this)
-                        .setEditText("小学生")
-                        .setEditTextHint("1-16个字符")         //文本提示，参数可以为null
+                Islands.editDialog(this)
+                        .setEditText("百年小糊涂")
+                        .setEditTextHint("1-16个字符")
                         .setText("修改昵称", null)
                         .setCancelable(false)
-                        .setButton("保存", "取消", null)
-                        .click(new OnEditListener() {
+                        .setButton("保存", "取消", null, new OnEditListener() {
                             @Override
                             public void getText(String text, int which) {
                                 if (0 == which){
@@ -162,16 +146,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt_6:
                 //圆形进度条对话框
-                Islands
-                        .circularProgress(this)
+                Islands.circularProgress(this)
                         .setMessage("加载中...")             //设置提示信息
                         .setCancelable(false)               //设置是否可以取消
-                        .show()                             //显示进度条对话框
-                        .run(new OnRunningListener() {      //先.show()后.run()
+                        .run(new OnRunningListener() {
                             @Override
                             public void onRunning(final ProgressDialog dialog) {
                                 //这里写处理事件逻辑，处理完毕调用dialog.dismiss();关闭对话框。
-                                //例如下面代码延时5s关闭进度条对话框。
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
@@ -179,12 +160,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     }
                                 }, 5000);
                             }
-                        });
+                        }).show();
                 break;
             case R.id.bt_7:
                 //日历对话框
-                Islands
-                        .dateDialog(this)
+                Islands.dateDialog(this)
                         .select(new OnDateSelectListener() {                //选择日期
                             @Override
                             public void OnDateSelect(SelectDate date) {     //得到结果
@@ -194,8 +174,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt_8:
                 //时钟对话框
-                Islands
-                        .timeDialog(this)
+                Islands.timeDialog(this)
                         .select(new OnTimeSelectListener() {                //选择时间
                             @Override
                             public void onTimeSelect(SelectTime time) {     //得到结果

@@ -25,19 +25,10 @@ import com.smailnet.islands.Interface.OnClickListener;
 /**
  * 普通对话框
  */
-public class OrdinaryDialog {
-
-    private int iconId;                     //图标
-    private String title;                   //标题
-    private String message;                 //文本信息
-    private String positiveButton;          //positive按钮
-    private String negativeButton;          //negative按钮
-    private String neutralButton;           //neutral按钮
-    private boolean cancelable = true;      //是否可取消
-    private AlertDialog.Builder dialog;
+public class OrdinaryDialog extends BaseDialog{
 
     public OrdinaryDialog(Context context){
-        dialog = new AlertDialog.Builder(context);
+        super(context);
     }
 
     /**
@@ -47,7 +38,7 @@ public class OrdinaryDialog {
      * @return
      */
     public OrdinaryDialog setIcon(int iconId){
-        this.iconId = iconId;
+        alertDialog.setIcon(iconId);
         return this;
     }
 
@@ -59,8 +50,8 @@ public class OrdinaryDialog {
      * @return
      */
     public OrdinaryDialog setText(String title, String message) {
-        this.title = title;
-        this.message = message;
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
         return this;
     }
 
@@ -71,7 +62,7 @@ public class OrdinaryDialog {
      * @return
      */
     public OrdinaryDialog setCancelable(boolean cancelable){
-        this.cancelable = cancelable;
+        alertDialog.setCancelable(cancelable);
         return this;
     }
 
@@ -79,25 +70,28 @@ public class OrdinaryDialog {
     /**
      * 设置按钮
      *
-     * @param positiveButton
-     * @param negativeButton
-     * @param neutralButton
+     * @param positive
+     * @param negative
+     * @param neutral
      * @return
      */
-    public OrdinaryDialog setButton(String positiveButton, String negativeButton, String neutralButton){
-        this.positiveButton = positiveButton;
-        this.negativeButton = negativeButton;
-        this.neutralButton = neutralButton;
+    public OrdinaryDialog setButton(String positive, String negative, String neutral){
+        alertDialog.setPositiveButton(positive, null);
+        alertDialog.setNegativeButton(negative, null);
+        alertDialog.setNeutralButton(neutral, null);
         return this;
     }
 
     /**
-     * 设置点击回调，回调OnClickListener
-     * @param onClickListener
+     * 设置按钮，回调OnClickListener
+     *
+     * @param positive
+     * @param negative
+     * @param neutral
      * @return
      */
-    public OrdinaryDialog click(final OnClickListener onClickListener){
-        dialog.setPositiveButton(positiveButton, new DialogInterface.OnClickListener() {
+    public OrdinaryDialog setButton(String positive, String negative, String neutral, final OnClickListener onClickListener){
+        alertDialog.setPositiveButton(positive, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 onClickListener.onClick(0);
@@ -105,7 +99,7 @@ public class OrdinaryDialog {
             }
         });
 
-        dialog.setNegativeButton(negativeButton, new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton(negative, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 onClickListener.onClick(1);
@@ -113,40 +107,13 @@ public class OrdinaryDialog {
             }
         });
 
-        dialog.setNeutralButton(neutralButton, new DialogInterface.OnClickListener() {
+        alertDialog.setNeutralButton(neutral, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 onClickListener.onClick(2);
                 dialog.dismiss();
             }
         });
-
-        return this;
-    }
-
-    /**
-     * 设置点击，无回调
-     *
-     * @return
-     */
-    public OrdinaryDialog click(){
-        dialog.setPositiveButton(positiveButton, null);
-        dialog.setNegativeButton(negativeButton, null);
-        dialog.setNeutralButton(neutralButton, null);
-        return this;
-    }
-
-    /**
-     * 显示对话框
-     *
-     * @return
-     */
-    public OrdinaryDialog show(){
-        dialog.setIcon(iconId);
-        dialog.setTitle(title);
-        dialog.setMessage(message);
-        dialog.setCancelable(cancelable);
-        dialog.show();
         return this;
     }
 }

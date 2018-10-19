@@ -25,18 +25,10 @@ import com.smailnet.islands.Interface.OnListItemClickListener;
 /**
  * 列表对话框
  */
-public class ListDialog {
-
-    private int iconId;                     //图标
-    private String title;                   //标题
-    private String message;                 //文本信息
-    private boolean cancelable = true;      //是否可取消
-    private String[] items;
-    private OnListItemClickListener onListItemClickListener;
-    private AlertDialog.Builder dialog;
+public class ListDialog extends BaseDialog{
 
     public ListDialog(Context context){
-        dialog = new AlertDialog.Builder(context);
+        super(context);
     }
 
     /**
@@ -46,7 +38,7 @@ public class ListDialog {
      * @return
      */
     public ListDialog setIcon(int iconId){
-        this.iconId = iconId;
+        alertDialog.setIcon(iconId);
         return this;
     }
 
@@ -54,12 +46,10 @@ public class ListDialog {
      * 设置标题和文本信息
      *
      * @param title
-     * @param message
      * @return
      */
-    public ListDialog setText(String title, String message) {
-        this.title = title;
-        this.message = message;
+    public ListDialog setText(String title) {
+        alertDialog.setTitle(title);
         return this;
     }
 
@@ -70,7 +60,7 @@ public class ListDialog {
      * @return
      */
     public ListDialog setCancelable(boolean cancelable){
-        this.cancelable = cancelable;
+        alertDialog.setCancelable(cancelable);
         return this;
     }
 
@@ -79,40 +69,13 @@ public class ListDialog {
      * @param items
      * @return
      */
-    public ListDialog setItems(String items[]){
-        this.items = items;
-        return this;
-    }
-
-    /**
-     * 设置点击监听
-     *
-     * @param onListItemClickListener
-     * @return
-     */
-    public ListDialog click(OnListItemClickListener onListItemClickListener){
-        this.onListItemClickListener = onListItemClickListener;
-        return this;
-    }
-
-    /**
-     * 显示对话框
-     *
-     * @return
-     */
-    public ListDialog show(){
-        dialog.setIcon(iconId);
-        dialog.setTitle(title);
-        dialog.setMessage(message);
-        dialog.setCancelable(cancelable);
-        dialog.setItems(items, new DialogInterface.OnClickListener() {
+    public ListDialog setItems(String items[], final OnListItemClickListener onListItemClickListener){
+        alertDialog.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 onListItemClickListener.onClick(which);
             }
         });
-        dialog.show();
         return this;
     }
-
 }

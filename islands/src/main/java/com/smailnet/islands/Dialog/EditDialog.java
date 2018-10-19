@@ -28,24 +28,15 @@ import com.smailnet.islands.R;
 /**
  * 编辑对话框
  */
-public class EditDialog {
+public class EditDialog extends BaseDialog{
 
-    private int iconId;                     //图标
-    private String title;                   //标题
-    private String message;                 //文本信息
-    private String positiveButton;          //positive按钮
-    private String negativeButton;          //negative按钮
-    private String neutralButton;           //neutral按钮
-    private boolean cancelable = true;      //是否可取消
-    private OnEditListener onEditListener;
-    private AlertDialog.Builder dialog;
     private EditText editText;
 
     public EditDialog(Context context){
-        dialog = new AlertDialog.Builder(context);
+        super(context);
         View view = View.inflate(context, R.layout.dialog_layout, null);
         editText = view.findViewById(R.id.dialog_EditText);
-        dialog.setView(view);
+        alertDialog.setView(view);
     }
 
     /**
@@ -55,7 +46,7 @@ public class EditDialog {
      * @return
      */
     public EditDialog setIcon(int iconId){
-        this.iconId = iconId;
+        alertDialog.setIcon(iconId);
         return this;
     }
 
@@ -67,8 +58,8 @@ public class EditDialog {
      * @return
      */
     public EditDialog setText(String title, String message) {
-        this.title = title;
-        this.message = message;
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
         return this;
     }
 
@@ -96,15 +87,33 @@ public class EditDialog {
     /**
      * 设置按钮
      *
-     * @param positiveButton
-     * @param negativeButton
-     * @param neutralButton
+     * @param positive
+     * @param negative
+     * @param neutral
      * @return
      */
-    public EditDialog setButton(String positiveButton, String negativeButton, String neutralButton){
-        this.positiveButton = positiveButton;
-        this.negativeButton = negativeButton;
-        this.neutralButton = neutralButton;
+    public EditDialog setButton(String positive, String negative, String neutral, final OnEditListener onEditListener){
+        alertDialog.setPositiveButton(positive, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                onEditListener.getText(editText.getText().toString(), 0);
+                dialog.dismiss();
+            }
+        });
+        alertDialog.setNegativeButton(negative, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                onEditListener.getText(editText.getText().toString(), 1);
+                dialog.dismiss();
+            }
+        });
+        alertDialog.setNeutralButton(neutral, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                onEditListener.getText(editText.getText().toString(), 2);
+                dialog.dismiss();
+            }
+        });
         return this;
     }
 
@@ -115,52 +124,7 @@ public class EditDialog {
      * @return
      */
     public EditDialog setCancelable(boolean cancelable){
-        this.cancelable = cancelable;
-        return this;
-    }
-
-    /**
-     * 设置点击回调，回调OnClickListener
-     * @param onEditListener
-     * @return
-     */
-    public EditDialog click(final OnEditListener onEditListener){
-        this.onEditListener = onEditListener;
-        return this;
-    }
-
-    /**
-     * 显示对话框
-     *
-     * @return
-     */
-    public EditDialog show(){
-        dialog.setIcon(iconId);
-        dialog.setTitle(title);
-        dialog.setMessage(message);
-        dialog.setCancelable(cancelable);
-        dialog.setPositiveButton(positiveButton, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                onEditListener.getText(editText.getText().toString(), 0);
-                dialog.dismiss();
-            }
-        });
-        dialog.setNegativeButton(negativeButton, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                onEditListener.getText(editText.getText().toString(), 1);
-                dialog.dismiss();
-            }
-        });
-        dialog.setNeutralButton(neutralButton, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                onEditListener.getText(editText.getText().toString(), 2);
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
+        alertDialog.setCancelable(cancelable);
         return this;
     }
 
